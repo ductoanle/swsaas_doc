@@ -75,7 +75,7 @@ This end point does not require user to login
 </aside>
 
 ## Account
-## Create Account
+### Create Account
 - User can create account after login
 
 #### HTTP Request
