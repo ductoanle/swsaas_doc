@@ -11,7 +11,7 @@ def docker_tag(tag):
     return "ductoanle/saleswhale_doc" + ":" + tag
 
 @task
-@hosts('arsene')
+@hosts('arsene.local')
 def deploy(dockerTag=None, codeTag=None):
     if dockerTag is None:
         print("You must give a docker tag to deploy")

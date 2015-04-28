@@ -6,6 +6,12 @@ title: SalesWhale API Reference v.0.1
 # Introduction
 
 # APIs
+
+## Requirements
+- All request must have `client` to define where the request coming from (iOS/Android/Web). This requirement only applicable to requests under the `api` scope
+- For request that require authorization, a combine of `authentication_token`, `timestamp` and `signature` will be required. Each `client` will be given a `secret` which can then be used to generate signature (combination of authentication_token, timestamp, secret and request url) for each request to API. The API can return stale timestamp for request that send timestamp earlier or later than 5 mins of the current time in server - a correct timestamp will be returned together with the stale timestamp error.
+
+
 ## Users
 ### Sign Up
 - The end point for new user sign up
@@ -49,6 +55,17 @@ username |
 email |
 authentication_token | Required for later API calls
 
+### Accept Invite
+- Add user as collaborator of an account
+- Return status 201 on success
+
+#### HTTP Request
+`POST /api/accept_invite`
+
+#### Query Parameters
+Parameter | Optional | Description
+----------|----------|-----------
+invite_token | No | token to identify the invitation
 
 ## Session
 ### Create Session - Login
@@ -93,20 +110,41 @@ name | Account Name
 owner_id | Id of user who created the account
 members | List of members (user_id) under this account
 
-## Info
+### Account Info
 - Return account information
 
 #### HTTP Request
-`POST /api/accounts/info`
+`POST /api/accounts/:account_id/info`
 
 #### Query Parameters
 Parameter | Optional | Description
 --------- | ------- | -----------
-name | No | Name of account to be created
+account_id | No | unique id of the account
 
 #### Returned JSON
 Name | Description
 --------- | -------
 name | Account Name
-owner_id | Id of user who created the account
-members | List of members (user_id) under this account
+members | List of members (user_id and role) under this account
+
+### Invite new user
+- Return status 201 on success, error otherwise
+
+#### HTTP Request
+`POST /api/accounts/:account_id/invite`
+
+#### Query Parameters
+Parameter | Optional | Description
+--------- | ------- | -----------
+account_id | No | unique id of the account
+name | No | name of the person to invite
+email | No | email to check if the user already exist in saleswhale or to send invite email
+
+## Google Auth
+
+### Onboarding
+
+#### HTTP Request
+`/auth/google`
+- Upon user allows permissions, will redirect back to onboarding page
+- Pulling user's contact in the background
