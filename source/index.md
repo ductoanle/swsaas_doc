@@ -34,6 +34,10 @@ username |
 email |
 authentication_token | Required for later API calls
 
+```shell
+curl -d "username=test_user&email='test@saleswhale.io&password=asdfgh&password_confirmation=asdfgh" http://api.saleswhale.io/api/users/sign_up
+```
+
 <aside class="info">
 This end point does not require user to login
 </aside>
@@ -86,6 +90,10 @@ Name | Description
 username |
 email |
 authentication_token | Required for later API calls
+
+```shell
+curl -d "username=jonsnow&&password=asdfgh" http://api.saleswhale.io/api/sessions/sign_in
+```
 
 <aside class="info">
 This end point does not require user to login
