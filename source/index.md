@@ -92,7 +92,7 @@ email |
 authentication_token | Required for later API calls
 
 ```shell
-curl -d "username=jonsnow&&password=asdfgh" http://api.saleswhale.io/api/sessions/sign_in
+curl -d "username=jonsnow&password=asdfgh" http://api.saleswhale.io/api/sessions/sign_in
 ```
 
 <aside class="info">
